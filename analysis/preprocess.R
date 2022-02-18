@@ -64,7 +64,7 @@ lavalamp_variance_plot <- barplot (lavalamp_PCA_variance_percentage,
 
 #The PCA Plot with Outliers was plotted
 ggplot(data = lavalamp_PCA_rotated, mapping = aes(x=PC1, y=PC2)) +
-  geom_point(color = "purple") +
+  geom_point(color = "purple") +xlab(paste("PC1",lavalamp_PCA_variance_percentage[1],"%"))+ ylab(paste("PC2",lavalamp_PCA_variance_percentage[2],"%"))+
   labs(title = "The PCA Plot")
 
 #The PC1 and PC2 Boxplots to visualize standard deviation was made
@@ -92,5 +92,5 @@ lavalampfiltered2 <- prcomp(LavaLampFiltered, scale = FALSE, center = FALSE)
 #Final PCA Plot
 lavalampfiltered_rotated <- as.data.frame(lavalampfiltered2$rotation)
 ggplot(data = lavalampfiltered_rotated, mapping = aes (x=PC1, y=PC2)) +
-  geom_point(color = "blue") +
+  geom_point(color = "blue")+xlab(paste("PC1",lavalamp_PCA_variance_percentage[1],"%"))+ ylab(paste("PC2",lavalamp_PCA_variance_percentage[2],"%"))+
   labs(title = "The Filtered PCA Plot")
