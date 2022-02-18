@@ -78,26 +78,22 @@ ggplot(data = lavalamp_PCA_rotated, mapping = aes(y=PC1)) +
       labs(title = "The PC1 BoxPlot")
 
 #Attempting to remove outliers that are 3 standard deviations away from mean
- which(lavalamp_PCA_rotated$PC1 > mean(lavalamp_PCA_rotated$PC1) + 3*sd(lavalamp_PCA_rotated$PC1)
-       |lavalamp_PCA_rotated$PC1 < mean(lavalamp_PCA_rotated$PC1) - 3*sd(lavalamp_PCA_rotated$PC1))
- which(lavalamp_PCA_rotated$PC2 > mean(lavalamp_PCA_rotated$PC2) + 3*sd(lavalamp_PCA_rotated$PC2)
-       |lavalamp_PCA_rotated$PC2 < mean(lavalamp_PCA_rotated$PC2) - 3*sd(lavalamp_PCA_rotated$PC2))
- 
-outlier <- which(!(lavalamp_PCA_rotated$PC1 > mean(lavalamp_PCA_rotated$PC1) + 3*sd(lavalamp_PCA_rotated$PC1)
-                   |lavalamp_PCA_rotated$PC1 < mean(lavalamp_PCA_rotated$PC1) - 3*sd(lavalamp_PCA_rotated$PC1)) |
-                   lavalamp_PCA_rotated$PC2 > mean(lavalamp_PCA_rotated$PC2) + 3*sd(lavalamp_PCA_rotated$PC2)
-                 |lavalamp_PCA_rotated$PC2 < mean(lavalamp_PCA_rotated$PC2) - 3*sd(lavalamp_PCA_rotated$PC2))   
+which(lavalamp_PCA_rotated$PC1 > mean(lavalamp_PCA_rotated$PC1) + 3*sd(lavalamp_PCA_rotated$PC1)
+      |lavalamp_PCA_rotated$PC1 < mean(lavalamp_PCA_rotated$PC1) - 3*sd(lavalamp_PCA_rotated$PC1))
+which(lavalamp_PCA_rotated$PC2 > mean(lavalamp_PCA_rotated$PC2) + 3*sd(lavalamp_PCA_rotated$PC2)
+      |lavalamp_PCA_rotated$PC2 < mean(lavalamp_PCA_rotated$PC2) - 3*sd(lavalamp_PCA_rotated$PC2))
 
-LavaLampFiltered <- Transpose_Again_corrected_lavalamp[,outlier]
+outlier <- which(!(lavalamp_PCA_rotated$PC1 > mean(lavalamp_PCA_rotated$PC1) + 3*sd(lavalamp_PCA_rotated$PC1) |lavalamp_PCA_rotated$PC1 < mean(lavalamp_PCA_rotated$PC1) - 3*sd(lavalamp_PCA_rotated$PC1)) |lavalamp_PCA_rotated$PC2 > mean(lavalamp_PCA_rotated$PC2) + 3*sd(lavalamp_PCA_rotated$PC2)|lavalamp_PCA_rotated$PC2 < mean(lavalamp_PCA_rotated$PC2) - 3*sd(lavalamp_PCA_rotated$PC2))   
+
+LavaLampFiltered <- corrected_lavalamp[,outlier]
 
 lavalampfiltered2 <- prcomp(LavaLampFiltered, scale = FALSE, center = FALSE)
 
 #Final PCA Plot
 lavalampfiltered_rotated <- as.data.frame(lavalampfiltered2$rotation)
-ggplot(data = lavalampfiltered_rotated, mapping = aes(x=PC1, y=PC2)) +
+ggplot(data = lavalampfiltered_rotated, mapping = aes (x=PC1, y=PC2)) +
   geom_point(color = "blue") +
-      labs(title = "The Filtered PCA Plot")
-
+  labs(title = "The Filtered PCA Plot")
 
 
 
