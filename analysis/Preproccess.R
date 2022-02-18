@@ -40,7 +40,7 @@ mod = model.matrix(~normalizationcombatmod, data=lavalamp)
 corrected_lavalamp <- ComBat(dat = exprs_lavalamp, batch = batch, mod = mod)
 
 #The corrected_lavalamp is used to make a CSV file
-write.csv(corrected_lavalamp, file = "lavalamp.csv")
+write.csv(corrected_lavalamp, file = "preprocess.csv")
 
 
 ###Part 3

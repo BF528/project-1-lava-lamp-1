@@ -52,7 +52,7 @@ for(i in 1:length(subtypes)) {
   }
 }
 
-heatmap(hmmatrix, labRow = genelabel, ColSideColors = colcolors)
+heatmap(hmmatrix, labRow = genelabel, ColSideColors = colcolors, margins = c(13,5), xlab = "Samples", ylab = "Genes", main = "Gene Expression Across All Samples")
 
 #Welch T-Test
 #Data cleanup, assigning clusters to the expression data and transposing 
@@ -113,6 +113,8 @@ print(numsample[["2"]])
 passalldf <- ttest('triplefiltered.csv', cut_avg)
 passchidf <- ttest('chisqfiltered.csv', cut_avg)
 
+
 write.csv(passalldf, 'welchresultsallfilter.csv')
 write.csv(passchidf, 'welchresultchisq.csv')
+
 
