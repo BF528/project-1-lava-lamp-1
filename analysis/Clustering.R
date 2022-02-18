@@ -1,7 +1,8 @@
 library(tidyverse)
-#Cluster
+#Part 5 Clustering Code 
 
 data <- read.csv(file='triplefiltered.csv', sep = ',')
+data$X.1 <- NULL
 names(data)[1] <- 'ID'
 
 data_label <- data$ID
@@ -9,8 +10,11 @@ data$ID <- NULL
 
 transposed_data <- t(data)
 
+#Scale Data
 
 scaled <- as_tibble(scale(transposed_data))
+
+#Create Distance Matrix
 
 dist_mat <- dist(scaled, method = 'euclidean')
 
@@ -25,6 +29,7 @@ cut_avg <- cutree(hclust_avg, k = 2)
 #Heatmap 
 
 hmdata <- read.csv(file='triplefiltered.csv', sep = ',')
+hmdata$X.1 <- NULL
 names(hmdata)[1] <- 'ID'
 genelabel <- hmdata$ID
 hmdata$ID <- NULL
@@ -33,7 +38,10 @@ hmmatrix <- as.matrix(hmdata)
 
 #Assigning ColSideColors
 amatrix <- read.csv(file = '/project/bf528/project_1/doc/proj_metadata.csv')
-subtypes <- amatrix$cit.coloncancermolecularsubtype[100:134]
+
+
+
+subtypes <- amatrix$cit.coloncancermolecularsubtype
 colcolors <- character(length(subtypes))
 
 for(i in 1:length(subtypes)) {
@@ -51,6 +59,7 @@ heatmap(hmmatrix, labRow = genelabel, ColSideColors = colcolors)
 
 ttest <- function(filename, cut_avg) {
   tdata <- read.csv(file=filename, sep = ',')
+  tdata$X.1 <- NULL
   names(tdata)[1] <- 'ID'
   tlabel <- tdata$ID
   tdata$ID <- NULL
@@ -95,7 +104,7 @@ ttest <- function(filename, cut_avg) {
   return(sorteddf)
 }
 numsample <- table(cut_avg)
-numsample[["1"]]
+
 print("Number of samples in the first cluster is:")
 print(numsample[["1"]])
 print("Number of samples in the second cluster is:")
