@@ -15,7 +15,7 @@ Data_LavaLamp_rma <- rma(Data, normalize = TRUE)
 
 
 
-#The RLE and NUSE Stats included the median and interquartile range
+#The RLE and NUSE Stats included the median and interquartile range (IQR)
 Data_LavaLamp <- fitPLM(Data, normalize=TRUE, background=TRUE)
 RLE(Data_LavaLamp, main="Relative Log Expression Plot")
 NUSE(Data_LavaLamp, main="Normalized Unscaled Standard Error Plot")
